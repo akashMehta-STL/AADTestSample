@@ -1,7 +1,7 @@
 package stllpt.com.aadtestsample
 
 import org.junit.Test
-
+import org.hamcrest.Matchers.*
 import org.junit.Assert.*
 
 /**
@@ -12,6 +12,6 @@ import org.junit.Assert.*
 class ExampleUnitTest {
     @Test
     fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
+        assertThat(4 == (2+2), `is`(true))
     }
 }
