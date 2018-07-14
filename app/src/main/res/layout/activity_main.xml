@@ -8,14 +8,15 @@
     tools:context=".MainActivity">
 
     <EditText
-        android:id="@+id/tvUserName"
+        android:id="@+id/etUserName"
+        android:text="akash@gmail.com"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         tools:ignore="LabelFor" />
 
     <EditText
-        android:id="@+id/tvPassword"
+        android:id="@+id/etPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
