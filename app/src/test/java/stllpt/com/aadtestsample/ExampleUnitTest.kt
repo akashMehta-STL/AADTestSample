@@ -9,9 +9,10 @@ import org.hamcrest.Matchers.*
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.runner.RunWith
+import org.mockito.ArgumentMatcher
+import org.mockito.ArgumentMatchers
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
-import java.lang.RuntimeException
 import java.util.*
 import java.util.regex.Pattern
 
@@ -81,14 +82,17 @@ class ExampleUnitTest {
 
     @Test
     fun test_stubbing() {
-        `when`(linkedList[0]).thenReturn("Hello")
+        `when`(linkedList[ArgumentMatchers.anyInt()]).thenReturn("Hello")
 
-        `when`(linkedList[1]).thenThrow(RuntimeException("Sample exception"))
-
-        println(linkedList[0])
-
-        println(linkedList[999])
-
-        verify(linkedList)[0]
+        `when`(linkedList.contains(ArgumentMatchers.argThat(isValida()))).thenReturn(true)
+        linkedList.add("Hello")
+        verify(linkedList).add(argThat { someString -> someString.length >= 5 })
     }
+
+    private fun isValida(): ArgumentMatcher<String>? {
+        return ArgumentMatcher {
+            it.contains("Hello")
+        }
+    }
+
 }
