@@ -1,13 +1,13 @@
 package stllpt.com.aadtestsample
 
 import android.content.Context
-import android.util.Patterns
 import org.junit.Test
 
 import org.mockito.Mockito.*
 
 import org.hamcrest.Matchers.*
 import org.junit.Assert.*
+import org.junit.Before
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
@@ -22,6 +22,11 @@ import java.util.regex.Pattern
 class ExampleUnitTest {
     @Mock
     lateinit var context: Context
+
+    @Mock
+    lateinit var mainPresenterView: MainPresenter.View
+
+    lateinit var mainPresenter: MainPresenter
 
     val EMAIL_ADDRESS_PATTERN = Pattern.compile(
             "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
@@ -47,5 +52,23 @@ class ExampleUnitTest {
         val mainActivity = MainActivity()
         val result = mainActivity.appString(context)
         assertThat(result, `is`("AADTestSample"))
+    }
+
+    /**
+     * Before : Used to initialize variables before starting any test.
+     */
+    @Before
+    fun initialize() {
+        mainPresenter = MainPresenter(mainPresenterView)
+    }
+
+    /**
+     * verify method will verify the method
+     */
+    @Test
+    fun test_addNoteCall() {
+        mainPresenter.insertNote()
+
+        verify(mainPresenterView).addNote()
     }
 }

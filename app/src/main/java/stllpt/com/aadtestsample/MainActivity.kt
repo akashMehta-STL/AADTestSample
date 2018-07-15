@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 
-open class MainActivity : AppCompatActivity() {
+open class MainActivity : AppCompatActivity(), MainPresenter.View {
     lateinit var etEmail: EditText
     lateinit var etPassword : EditText
     lateinit var btnSubmit: Button
@@ -21,6 +21,10 @@ open class MainActivity : AppCompatActivity() {
         etEmail = findViewById(R.id.etUserName)
         etPassword = findViewById(R.id.etPassword)
         btnSubmit = findViewById(R.id.btnSubmit)
+    }
+
+    override fun addNote() {
+
     }
 
     fun appString(context: Context) = context.getString(R.string.app_name)
