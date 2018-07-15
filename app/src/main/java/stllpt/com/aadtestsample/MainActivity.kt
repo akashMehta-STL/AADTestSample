@@ -24,6 +24,10 @@ open class MainActivity : AppCompatActivity(), MainPresenter.View {
     }
 
     override fun addNote() {
+        noteAdded()
+    }
+
+    fun noteAdded() {
 
     }
 

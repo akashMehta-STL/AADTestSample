@@ -9,6 +9,7 @@ import org.hamcrest.Matchers.*
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.runner.RunWith
+import org.mockito.Answers
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
 import java.util.regex.Pattern
@@ -24,7 +25,7 @@ class ExampleUnitTest {
     lateinit var context: Context
 
     @Mock
-    lateinit var mainPresenterView: MainPresenter.View
+    lateinit var mainActivity: MainActivity
 
     lateinit var mainPresenter: MainPresenter
 
@@ -59,7 +60,7 @@ class ExampleUnitTest {
      */
     @Before
     fun initialize() {
-        mainPresenter = MainPresenter(mainPresenterView)
+        mainPresenter = MainPresenter(mainActivity)
     }
 
     /**
@@ -69,6 +70,8 @@ class ExampleUnitTest {
     fun test_addNoteCall() {
         mainPresenter.insertNote()
 
-        verify(mainPresenterView).addNote()
+        verify(mainActivity).addNote()
+        // Unable to make nested method call
+        verify(mainActivity).noteAdded()
     }
 }
