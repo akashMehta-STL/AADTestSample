@@ -9,9 +9,10 @@ import org.hamcrest.Matchers.*
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.runner.RunWith
-import org.mockito.Answers
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
+import java.lang.RuntimeException
+import java.util.*
 import java.util.regex.Pattern
 
 /**
@@ -22,22 +23,27 @@ import java.util.regex.Pattern
 @RunWith(MockitoJUnitRunner::class)
 class ExampleUnitTest {
     @Mock
-    lateinit var context: Context
+    private lateinit var context: Context
 
     @Mock
-    lateinit var mainActivity: MainActivity
+    private lateinit var mainActivity: MainActivity
 
-    lateinit var mainPresenter: MainPresenter
+    private lateinit var mainPresenter: MainPresenter
 
-    val EMAIL_ADDRESS_PATTERN = Pattern.compile(
-            "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
-                    "\\@" +
-                    "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
-                    "(" +
-                    "\\." +
-                    "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
-                    ")+"
-    )
+    @Mock
+    private lateinit var linkedList: LinkedList<String>
+
+    companion object {
+        private val EMAIL_ADDRESS_PATTERN = Pattern.compile(
+                "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
+                        "\\@" +
+                        "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
+                        "(" +
+                        "\\." +
+                        "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
+                        ")+"
+        )
+    }
 
     @Test
     fun addition_isCorrect() {
@@ -71,7 +77,18 @@ class ExampleUnitTest {
         mainPresenter.insertNote()
 
         verify(mainActivity).addNote()
-        // Unable to make nested method call
-        verify(mainActivity).noteAdded()
+    }
+
+    @Test
+    fun test_stubbing() {
+        `when`(linkedList[0]).thenReturn("Hello")
+
+        `when`(linkedList[1]).thenThrow(RuntimeException("Sample exception"))
+
+        println(linkedList[0])
+
+        println(linkedList[999])
+
+        verify(linkedList)[0]
     }
 }
