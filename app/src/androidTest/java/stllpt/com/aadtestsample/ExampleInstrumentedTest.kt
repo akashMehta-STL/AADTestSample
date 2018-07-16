@@ -3,6 +3,7 @@ package stllpt.com.aadtestsample
 import android.support.test.InstrumentationRegistry
 import android.support.test.espresso.Espresso.*
 import android.support.test.espresso.action.ViewActions.*
+import android.support.test.espresso.assertion.ViewAssertions.*
 import android.support.test.espresso.matcher.ViewMatchers.*
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
@@ -38,9 +39,9 @@ class ExampleInstrumentedTest {
 
     @Test
     fun checkSignIn() {
-        onView(withId(R.id.etUserName)).perform(replaceText("A@g.c"))
-        onView(withId(R.id.etPassword)).perform(replaceText("hello"))
+        onView(withId(R.id.etUserName)).perform(typeText("A@g.c"))
+        onView(withId(R.id.etPassword)).perform(typeText("hello"))
         onView(withId(R.id.btnSubmit)).perform(click())
-
+        onView(withId(R.id.tvOutput)).check(matches(isDisplayed()))
     }
 }
