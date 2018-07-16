@@ -9,12 +9,11 @@ import org.hamcrest.Matchers.*
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.runner.RunWith
-import org.mockito.ArgumentMatcher
-import org.mockito.ArgumentMatchers
-import org.mockito.Mock
+import org.mockito.*
 import org.mockito.junit.MockitoJUnitRunner
 import java.util.*
 import java.util.regex.Pattern
+import kotlin.collections.ArrayList
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -23,16 +22,26 @@ import java.util.regex.Pattern
  */
 @RunWith(MockitoJUnitRunner::class)
 class ExampleUnitTest {
+    private val notes = ArrayList(Arrays.asList(
+            MainPresenter.Note("Book1","Author1"),
+            MainPresenter.Note("Book2","Author2"),
+            MainPresenter.Note("Book3","Author3"),
+            MainPresenter.Note("Book4","Author4")
+    ))
+
     @Mock
     private lateinit var context: Context
 
     @Mock
-    private lateinit var mainActivity: MainActivity
+    private lateinit var mView: MainPresenter.View
 
     private lateinit var mainPresenter: MainPresenter
 
     @Mock
     private lateinit var linkedList: LinkedList<String>
+
+    @Captor
+    lateinit var listener: ArgumentCaptor<MainPresenter.LoadRepositoryData>
 
     companion object {
         private val EMAIL_ADDRESS_PATTERN = Pattern.compile(
@@ -67,7 +76,7 @@ class ExampleUnitTest {
      */
     @Before
     fun initialize() {
-        mainPresenter = MainPresenter(mainActivity)
+        mainPresenter = MainPresenter(mView)
     }
 
     /**
@@ -77,7 +86,7 @@ class ExampleUnitTest {
     fun test_addNoteCall() {
         mainPresenter.insertNote()
 
-        verify(mainActivity).addNote()
+        verify(mView).addNote()
     }
 
     @Test
@@ -93,6 +102,18 @@ class ExampleUnitTest {
         return ArgumentMatcher {
             it.contains("Hello")
         }
+    }
+
+    @Test
+    fun test_argumentCaptor() {
+        mainPresenter.loadNotes()
+
+        verify(mView).loadNotes(listener.capture())
+
+        listener.value.onDataLoaded(notes)
+
+        verify(mView).showProgressView(false)
+        verify(mView).showNotes(notes)
     }
 
 }

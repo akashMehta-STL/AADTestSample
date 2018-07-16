@@ -31,5 +31,18 @@ open class MainActivity : AppCompatActivity(), MainPresenter.View {
 
     }
 
+    override fun loadNotes(listener: MainPresenter.LoadRepositoryData?) {
+
+    }
+
+    override fun showProgressView(visibility: Boolean) {
+
+    }
+
+    override fun showNotes(notes: ArrayList<MainPresenter.Note>) {
+
+    }
+
+
     fun appString(context: Context) = context.getString(R.string.app_name)
 }
