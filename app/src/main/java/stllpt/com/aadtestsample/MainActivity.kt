@@ -5,11 +5,13 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 
-open class MainActivity : AppCompatActivity(), MainPresenter.View {
-    lateinit var etEmail: EditText
-    lateinit var etPassword : EditText
-    lateinit var btnSubmit: Button
+public open class MainActivity : AppCompatActivity(), MainPresenter.View {
+    private lateinit var etEmail: EditText
+    private lateinit var etPassword : EditText
+    private lateinit var btnSubmit: Button
+    private lateinit var tvOutput: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,13 +23,20 @@ open class MainActivity : AppCompatActivity(), MainPresenter.View {
         etEmail = findViewById(R.id.etUserName)
         etPassword = findViewById(R.id.etPassword)
         btnSubmit = findViewById(R.id.btnSubmit)
+        tvOutput = findViewById(R.id.tvOutput)
+        btnSubmit.setOnClickListener {
+            if (etEmail.value().isNonEmpty()) {
+                tvOutput.visible()
+                tvOutput.text = etEmail.value()
+            }
+        }
     }
 
     override fun addNote() {
         noteAdded()
     }
 
-    fun noteAdded() {
+    private fun noteAdded() {
 
     }
 
