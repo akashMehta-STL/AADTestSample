@@ -1,4 +1,4 @@
-package stllpt.com.aadtestsample
+package stllpt.com.aadtestsample.main
 
 import android.content.Context
 import android.support.v7.app.AppCompatActivity
@@ -6,8 +6,12 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import stllpt.com.aadtestsample.R
+import stllpt.com.aadtestsample.utils.isNonEmpty
+import stllpt.com.aadtestsample.utils.value
+import stllpt.com.aadtestsample.utils.visible
 
-public open class MainActivity : AppCompatActivity(), MainPresenter.View {
+open class MainActivity : AppCompatActivity(), MainPresenter.View {
     private lateinit var etEmail: EditText
     private lateinit var etPassword : EditText
     private lateinit var btnSubmit: Button
@@ -53,5 +57,5 @@ public open class MainActivity : AppCompatActivity(), MainPresenter.View {
     }
 
 
-    fun appString(context: Context) = context.getString(R.string.app_name)
+    fun appString(context: Context): String = context.getString(R.string.app_name)
 }

@@ -1,4 +1,4 @@
-package stllpt.com.aadtestsample
+package stllpt.com.aadtestsample.utils
 
 import android.widget.TextView
 

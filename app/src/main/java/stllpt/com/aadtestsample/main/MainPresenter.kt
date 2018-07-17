@@ -1,4 +1,4 @@
-package stllpt.com.aadtestsample
+package stllpt.com.aadtestsample.main
 
 /**
  * Created by stllpt031 on 15/7/18.

@@ -11,6 +11,8 @@ import org.junit.Before
 import org.junit.runner.RunWith
 import org.mockito.*
 import org.mockito.junit.MockitoJUnitRunner
+import stllpt.com.aadtestsample.main.MainActivity
+import stllpt.com.aadtestsample.main.MainPresenter
 import java.util.*
 import java.util.regex.Pattern
 import kotlin.collections.ArrayList
