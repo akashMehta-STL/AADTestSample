@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">AADTestSample</string>
     <string name="descSampleimage">SampleImage</string>
+    <string name="menu_title_capture_image">Capture image</string>
 </resources>
