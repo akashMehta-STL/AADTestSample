@@ -74,14 +74,18 @@ class ExampleInstrumentedTest {
     }
 
     private fun performOptionMenuClick() {
-        openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getTargetContext())
+        openActionBarOverflowOrOptionsMenu(mSecondaryTestIntent.activity)
+
         onView(withText(R.string.menu_title_capture_image)).perform(click())
     }
 
     private fun defineCaptureImageAction() {
         val result = getActivityResult()
         Intents.intending(IntentMatchers.hasAction(MediaStore.ACTION_IMAGE_CAPTURE))
-                .respondWith(result)
+                .respondWithFunction {
+                    println("SecondaryActivity:  Image capture action is called.")
+                    result
+                }
     }
 
     private fun getActivityResult(): Instrumentation.ActivityResult {

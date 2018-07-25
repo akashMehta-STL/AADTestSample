@@ -44,9 +44,10 @@ class SecondaryActivity : AppCompatActivity(), SecondaryPresenter.View {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        data?.let {
+        println("SecondaryActivity: On activity result called")
             val imageUrl = "file:///android_asset/atsl-logo.png"
             if (resultCode == Activity.RESULT_OK) {
+                println("SecondaryActivity: iv profile is $ivProfile")
                 ivProfile.visibility = View.VISIBLE
 
                 // The image is loaded in a different thread so in order to UI-test this, an idling resource
@@ -72,7 +73,6 @@ class SecondaryActivity : AppCompatActivity(), SecondaryPresenter.View {
                 }
 
 
-            }
         }
     }
 
