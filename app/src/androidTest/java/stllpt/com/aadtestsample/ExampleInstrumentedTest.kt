@@ -5,10 +5,12 @@ import android.app.Instrumentation
 import android.content.Intent
 import android.provider.MediaStore
 import android.support.test.InstrumentationRegistry
+import android.support.test.espresso.Espresso
 import android.support.test.espresso.Espresso.*
 import android.support.test.espresso.IdlingRegistry
 import android.support.test.espresso.UiController
 import android.support.test.espresso.ViewAction
+import android.support.test.espresso.action.ViewActions
 import android.support.test.espresso.action.ViewActions.*
 import android.support.test.espresso.assertion.ViewAssertions.*
 import android.support.test.espresso.contrib.RecyclerViewActions
@@ -36,6 +38,7 @@ import stllpt.com.aadtestsample.secondary.SecondaryActivity
 import stllpt.com.aadtestsample.secondary.SecondaryAdapter
 import stllpt.com.aadtestsample.util.ImageViewHasDrawableMatcher
 import stllpt.com.aadtestsample.util.TestUtils
+import stllpt.com.aadtestsample.web.WebActivity
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -72,12 +75,15 @@ class ExampleInstrumentedTest {
 
     @Test
     fun addImageNote_showImage() {
-        defineCaptureImageAction()
+//        defineCaptureImageAction()
 
         onView(withId(R.id.ivProfile)).check(matches(IsNot.not(isDisplayed())))
 
         performOptionMenuClick()
 
+        onView(withId(R.id.etUserName)).perform(typeText("Hello"))
+        onView(withId(R.id.etPassword)).perform(typeText("Hello"))
+        onView(withId(R.id.btnSubmit)).perform(click())
         onView(withId(R.id.ivProfile)).check(matches(isDisplayed()))
     }
 
@@ -89,9 +95,13 @@ class ExampleInstrumentedTest {
 
     private fun defineCaptureImageAction() {
         val result = getActivityResult()
-        Intents.intending(IntentMatchers.hasAction(MediaStore.ACTION_IMAGE_CAPTURE))
+//        Intents.intending(IntentMatchers.hasAction(MediaStore.ACTION_IMAGE_CAPTURE))
+//                .respondWithFunction {
+//                    println("SecondaryActivity:  Image capture action is called.")
+//                    result
+//                }
+        Intents.intending(IntentMatchers.hasComponent(MainActivity::class.java.name))
                 .respondWithFunction {
-                    println("SecondaryActivity:  Image capture action is called.")
                     result
                 }
     }

@@ -20,6 +20,7 @@ import com.bumptech.glide.request.animation.GlideAnimation
 import com.bumptech.glide.request.target.GlideDrawableImageViewTarget
 import kotlinx.android.synthetic.main.activity_secondary.*
 import stllpt.com.aadtestsample.R
+import stllpt.com.aadtestsample.main.MainActivity
 import stllpt.com.aadtestsample.utils.EspressoIdlingResource
 import stllpt.com.aadtestsample.utils.visibility
 
@@ -39,7 +40,7 @@ class SecondaryActivity : AppCompatActivity(), SecondaryPresenter.View {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        println("SecondaryActivity: On activity result called")
+            println("SecondaryActivity: On activity result called")
             val imageUrl = "file:///android_asset/atsl-logo.png"
             if (resultCode == Activity.RESULT_OK) {
                 println("SecondaryActivity: iv profile is $ivProfile")
@@ -56,7 +57,7 @@ class SecondaryActivity : AppCompatActivity(), SecondaryPresenter.View {
                         .centerCrop()
                         .into(object : GlideDrawableImageViewTarget(ivProfile) {
                             override fun onResourceReady(resource: GlideDrawable,
-                                                animation: GlideAnimation<in GlideDrawable>) {
+                                                         animation: GlideAnimation<in GlideDrawable>) {
                                 super.onResourceReady(resource, animation)
                                 EspressoIdlingResource.decrement() // Set app as idle.
                             }
@@ -66,8 +67,8 @@ class SecondaryActivity : AppCompatActivity(), SecondaryPresenter.View {
                 } catch (e: InterruptedException) {
                     e.printStackTrace()
                 }
+            }
         }
-    }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_secondary_activity, menu)
@@ -77,8 +78,9 @@ class SecondaryActivity : AppCompatActivity(), SecondaryPresenter.View {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item?.itemId) {
             R.id.menuCaptureImage -> {
-                startActivityForResult(Intent(MediaStore.ACTION_IMAGE_CAPTURE),
-                        ACTION_CAPTURE_IMAGE)
+//                startActivityForResult(Intent(MediaStore.ACTION_IMAGE_CAPTURE),
+//                        ACTION_CAPTURE_IMAGE)
+            startActivityForResult(Intent(this, MainActivity::class.java), ACTION_CAPTURE_IMAGE)
             }
         }
         return true
@@ -87,12 +89,12 @@ class SecondaryActivity : AppCompatActivity(), SecondaryPresenter.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_secondary)
-        mPresenter = SecondaryPresenter(this)
-        mPresenter.showDummyData()
+//        mPresenter = SecondaryPresenter(this)
+//        mPresenter.showDummyData()
 
-//        username = ""
-//        password = ""
-//        initUI()
+        username = ""
+        password = ""
+        initUI()
     }
 
     private fun initUI() {

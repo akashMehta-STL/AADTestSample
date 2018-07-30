@@ -1,5 +1,6 @@
 package stllpt.com.aadtestsample.main
 
+import android.app.Activity
 import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -30,8 +31,8 @@ open class MainActivity : AppCompatActivity(), MainPresenter.View {
         tvOutput = findViewById(R.id.tvOutput)
         btnSubmit.setOnClickListener {
             if (etEmail.value().isNonEmpty()) {
-                tvOutput.visible()
-                tvOutput.text = etEmail.value()
+                setResult(Activity.RESULT_OK)
+                finish()
             }
         }
     }
