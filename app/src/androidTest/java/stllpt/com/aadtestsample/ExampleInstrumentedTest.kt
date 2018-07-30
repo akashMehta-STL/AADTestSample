@@ -112,6 +112,9 @@ class ExampleInstrumentedTest {
         IdlingRegistry.getInstance().unregister(mSecondaryTestIntent.activity.getCountingIdlingResource())
     }
 
+    /**
+     * TextView, ImageView content check
+     */
     @Test
     fun checkDisplayData() {
         onView(withId(R.id.tvUserName)).check(matches(withText(userName)))
@@ -119,6 +122,10 @@ class ExampleInstrumentedTest {
         onView(withId(R.id.ivProfile)).check(matches(Matchers.allOf(ImageViewHasDrawableMatcher.hasDrawable(), isDisplayed())))
     }
 
+
+    /**
+     * RecyclerView Content test
+     */
     @Test
     fun checkAdapterView() {
         onView(withId(R.id.rvContent)).perform(RecyclerViewActions
@@ -127,7 +134,7 @@ class ExampleInstrumentedTest {
 
     @Test
     fun checkRecyclerViewContent() {
-//        onView(TestUtils.withRecyclerView(R.id.rvContent).atPosition(3)).check( hasD)
+        onView(TestUtils.withRecyclerView(R.id.rvContent).atPositionOnView(3, R.id.tvName)).check(matches(withText("email 3")))
 
     }
 }
