@@ -7,14 +7,11 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.support.annotation.VisibleForTesting
 import android.support.test.espresso.IdlingResource
-import android.support.v4.content.ContextCompat
-import android.support.v4.util.Preconditions.checkState
-import android.text.TextUtils
-import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.view.*
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -37,8 +34,6 @@ class SecondaryActivity : AppCompatActivity(), SecondaryPresenter.View {
     private lateinit var mPresenter: SecondaryPresenter
 
     companion object {
-        const val USER_NAME = "userName"
-        const val PASSWORD = "password"
         const val ACTION_CAPTURE_IMAGE = 2001
     }
 
@@ -71,8 +66,6 @@ class SecondaryActivity : AppCompatActivity(), SecondaryPresenter.View {
                 } catch (e: InterruptedException) {
                     e.printStackTrace()
                 }
-
-
         }
     }
 
@@ -94,10 +87,12 @@ class SecondaryActivity : AppCompatActivity(), SecondaryPresenter.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_secondary)
+        mPresenter = SecondaryPresenter(this)
+        mPresenter.showDummyData()
 
-        username = ""
-        password = ""
-        initUI()
+//        username = ""
+//        password = ""
+//        initUI()
     }
 
     private fun initUI() {
@@ -114,6 +109,11 @@ class SecondaryActivity : AppCompatActivity(), SecondaryPresenter.View {
         llData.visibility = visibility.visibility()
     }
 
+    override fun populateData(itemList: ArrayList<SecondaryModel>) {
+        rvContent.layoutManager = LinearLayoutManager(this)
+        rvContent.adapter = SecondaryAdapter(itemList)
+    }
+
     override fun setupData(secondaryModel: SecondaryModel) {
         secondaryModel.apply {
             tvEmail.text = email
@@ -126,4 +126,5 @@ class SecondaryActivity : AppCompatActivity(), SecondaryPresenter.View {
     fun getCountingIdlingResource(): IdlingResource {
         return EspressoIdlingResource.getIdlingResource()
     }
+
 }

@@ -7,14 +7,20 @@ import android.provider.MediaStore
 import android.support.test.InstrumentationRegistry
 import android.support.test.espresso.Espresso.*
 import android.support.test.espresso.IdlingRegistry
+import android.support.test.espresso.UiController
+import android.support.test.espresso.ViewAction
 import android.support.test.espresso.action.ViewActions.*
 import android.support.test.espresso.assertion.ViewAssertions.*
+import android.support.test.espresso.contrib.RecyclerViewActions
 import android.support.test.espresso.intent.Intents
 import android.support.test.espresso.intent.matcher.IntentMatchers
 import android.support.test.espresso.intent.rule.IntentsTestRule
 import android.support.test.espresso.matcher.ViewMatchers.*
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
+import android.view.View
+import kotlinx.android.synthetic.main.item_row.view.*
+import org.hamcrest.Matcher
 import org.hamcrest.Matchers
 import org.hamcrest.core.IsNot
 import org.junit.After
@@ -27,7 +33,9 @@ import org.junit.Before
 import org.junit.Rule
 import stllpt.com.aadtestsample.main.MainActivity
 import stllpt.com.aadtestsample.secondary.SecondaryActivity
+import stllpt.com.aadtestsample.secondary.SecondaryAdapter
 import stllpt.com.aadtestsample.util.ImageViewHasDrawableMatcher
+import stllpt.com.aadtestsample.util.TestUtils
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -109,5 +117,17 @@ class ExampleInstrumentedTest {
         onView(withId(R.id.tvUserName)).check(matches(withText(userName)))
         onView(withId(R.id.tvPassword)).check(matches(withText(password)))
         onView(withId(R.id.ivProfile)).check(matches(Matchers.allOf(ImageViewHasDrawableMatcher.hasDrawable(), isDisplayed())))
+    }
+
+    @Test
+    fun checkAdapterView() {
+        onView(withId(R.id.rvContent)).perform(RecyclerViewActions
+                .actionOnItemAtPosition<SecondaryAdapter.ViewHolder>(13, click()))
+    }
+
+    @Test
+    fun checkRecyclerViewContent() {
+//        onView(TestUtils.withRecyclerView(R.id.rvContent).atPosition(3)).check( hasD)
+
     }
 }

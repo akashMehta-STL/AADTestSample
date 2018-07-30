@@ -7,6 +7,14 @@ import android.os.Handler
  */
 class SecondaryPresenter (val view: View){
 
+    fun showDummyData() {
+        val itemList = ArrayList<SecondaryModel>()
+        for (i in 0 until 25) {
+            itemList.add(SecondaryModel("email $i", "password $i"))
+        }
+        view.populateData(itemList)
+    }
+
     fun showData(secondaryModel: SecondaryModel) {
         view.showProgress(true)
         view.showData(false)
@@ -20,6 +28,7 @@ class SecondaryPresenter (val view: View){
     interface View {
         fun showProgress(visibility: Boolean)
         fun showData(visibility: Boolean)
+        fun populateData(itemList: ArrayList<SecondaryModel>)
         fun setupData(secondaryModel: SecondaryModel)
     }
 }
