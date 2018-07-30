@@ -121,20 +121,4 @@ class ExampleInstrumentedTest {
         onView(withId(R.id.tvPassword)).check(matches(withText(password)))
         onView(withId(R.id.ivProfile)).check(matches(Matchers.allOf(ImageViewHasDrawableMatcher.hasDrawable(), isDisplayed())))
     }
-
-
-    /**
-     * RecyclerView Content test
-     */
-    @Test
-    fun checkAdapterView() {
-        onView(withId(R.id.rvContent)).perform(RecyclerViewActions
-                .actionOnItemAtPosition<SecondaryAdapter.ViewHolder>(13, click()))
-    }
-
-    @Test
-    fun checkRecyclerViewContent() {
-        onView(TestUtils.withRecyclerView(R.id.rvContent).atPositionOnView(3, R.id.tvName)).check(matches(withText("email 3")))
-
-    }
 }
