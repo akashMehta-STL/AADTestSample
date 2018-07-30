@@ -2,20 +2,16 @@ package stllpt.com.aadtestsample
 
 import android.support.test.espresso.Espresso
 import android.support.test.espresso.IdlingRegistry
-import android.support.test.espresso.intent.matcher.BundleMatchers
 import android.support.test.espresso.intent.rule.IntentsTestRule
 import android.support.test.runner.AndroidJUnit4
-import org.hamcrest.core.AllOf
-import org.hamcrest.core.Is
 import org.hamcrest.core.IsEqual
-import org.hamcrest.core.IsInstanceOf
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import stllpt.com.aadtestsample.list.ListActivity
-import java.util.ArrayList
+import stllpt.com.aadtestsample.util.ListViewMatchers
 
 /**
  * Created by aakash on 29/7/18.
@@ -33,7 +29,7 @@ class ListInstrumentedTest {
 
     @Test
     fun testListScroll() {
-//        Espresso.onData(withItemContent)
+        Espresso.onData(ListViewMatchers.withItemContent(IsEqual.equalTo("user 2"), 1))
     }
 
     @After

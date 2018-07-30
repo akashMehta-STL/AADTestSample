@@ -20,7 +20,7 @@ class ListActivity : AppCompatActivity(), ListPresenter.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
         mPresenter = ListPresenter(this)
-        lvContent.adapter = ArrayAdapter(this, android.R.layout.simple_list_item_2, itemList)
+        lvContent.adapter = ArrayAdapter(this, R.layout.list_item_row, R.id.tvItemName, itemList)
         mPresenter.populateData()
     }
 

@@ -45,6 +45,5 @@ class RecyclerViewInstrumentedTest {
     @Test
     fun checkRecyclerViewContent() {
         Espresso.onView(TestUtils.withRecyclerView(R.id.rvContent).atPositionOnView(3, R.id.tvName)).check(ViewAssertions.matches(ViewMatchers.withText("email 3")))
-
     }
 }
