@@ -2,27 +2,16 @@ package stllpt.com.aadtestsample
 
 import android.app.Activity
 import android.app.Instrumentation
-import android.content.Intent
-import android.provider.MediaStore
 import android.support.test.InstrumentationRegistry
-import android.support.test.espresso.Espresso
 import android.support.test.espresso.Espresso.*
 import android.support.test.espresso.IdlingRegistry
-import android.support.test.espresso.UiController
-import android.support.test.espresso.ViewAction
-import android.support.test.espresso.action.ViewActions
 import android.support.test.espresso.action.ViewActions.*
 import android.support.test.espresso.assertion.ViewAssertions.*
-import android.support.test.espresso.contrib.RecyclerViewActions
 import android.support.test.espresso.intent.Intents
 import android.support.test.espresso.intent.matcher.IntentMatchers
 import android.support.test.espresso.intent.rule.IntentsTestRule
 import android.support.test.espresso.matcher.ViewMatchers.*
-import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
-import android.view.View
-import kotlinx.android.synthetic.main.item_row.view.*
-import org.hamcrest.Matcher
 import org.hamcrest.Matchers
 import org.hamcrest.core.IsNot
 import org.junit.After
@@ -35,10 +24,7 @@ import org.junit.Before
 import org.junit.Rule
 import stllpt.com.aadtestsample.main.MainActivity
 import stllpt.com.aadtestsample.secondary.SecondaryActivity
-import stllpt.com.aadtestsample.secondary.SecondaryAdapter
 import stllpt.com.aadtestsample.util.ImageViewHasDrawableMatcher
-import stllpt.com.aadtestsample.util.TestUtils
-import stllpt.com.aadtestsample.web.WebActivity
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -58,7 +44,7 @@ class ExampleInstrumentedTest {
     }
 
     @get:Rule
-    public val mSecondaryTestIntent: IntentsTestRule<SecondaryActivity> = IntentsTestRule<SecondaryActivity>(SecondaryActivity::class.java)
+    val mSecondaryTestIntent: IntentsTestRule<SecondaryActivity> = IntentsTestRule<SecondaryActivity>(SecondaryActivity::class.java)
 
     @Test
     fun checkSignIn() {

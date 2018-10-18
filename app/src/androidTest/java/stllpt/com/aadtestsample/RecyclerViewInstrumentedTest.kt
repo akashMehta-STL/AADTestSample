@@ -23,7 +23,7 @@ import stllpt.com.aadtestsample.util.TestUtils
 @RunWith(AndroidJUnit4::class)
 class RecyclerViewInstrumentedTest {
     @get:Rule
-    public val mSecondaryTestIntent: IntentsTestRule<SecondaryActivity> = IntentsTestRule<SecondaryActivity>(SecondaryActivity::class.java)
+    val mSecondaryTestIntent: IntentsTestRule<SecondaryActivity> = IntentsTestRule<SecondaryActivity>(SecondaryActivity::class.java)
 
     @Before
     fun registerIdlingResources() {
